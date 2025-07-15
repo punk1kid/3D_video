@@ -7,7 +7,7 @@ void line(int x0, int x1, int y0, int y1, sf::RenderWindow* window, sf::Color co
 {
 
     bool steep = false;
-    if (std::abs(x0 - x1) < s   td::abs(y0 - y1)) {
+    if (std::abs(x0 - x1) < std::abs(y0 - y1)) {
         std::swap(x0, y0);
         std::swap(x1, y1);
         steep = true;
