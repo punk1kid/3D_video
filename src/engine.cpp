@@ -1,11 +1,10 @@
 #include <SFML/Graphics.hpp>
 #include <thread>
 #include <cstdlib>
-
+#include <optional>
 
 void line(int x0, int x1, int y0, int y1, sf::RenderWindow* window, sf::Color color)
 {
-
     bool steep = false;
     if (std::abs(x0 - x1) < std::abs(y0 - y1)) {
         std::swap(x0, y0);
@@ -24,40 +23,42 @@ void line(int x0, int x1, int y0, int y1, sf::RenderWindow* window, sf::Color co
 
         sf::Vertex v1;
         if (steep) {
-            v1 = { {static_cast<float>(x), static_cast<float>(y)}, color };
-        }
-        else
-        {
             v1 = { {static_cast<float>(y), static_cast<float>(x)}, color };
         }
+        else {
+            v1 = { {static_cast<float>(x), static_cast<float>(y)}, color };
+        }
 
-        // Рисуем точку
         window->draw(&v1, 1, sf::PrimitiveType::Points);
     }
-
-
 }
 
+
+void triangle(int x0, int y0, int x1, int y1, int x2, int y2, sf::RenderWindow* window, sf::Color color)
+{
+    line(x0, x1, y0, y1, window, color);
+    line(x1, x2, y1, y2, window, color);
+    line(x2, x0, y2, y0, window, color);
+}
 
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode({ 1920, 1080 }), "SFML works!");
+    sf::RenderWindow window(sf::VideoMode({ 1920, 1080 }), "SFML Triangle");
 
     while (window.isOpen())
     {
         while (const std::optional event = window.pollEvent())
         {
-
             if (event->is<sf::Event::Closed>())
                 window.close();
         }
 
-        line(100, 900, 100, 500, &window, sf::Color::Magenta);
-        line(500, 200, 100, 400, &window, sf::Color::Cyan);
+        window.clear();
+
+
+        triangle(300, 200, 600, 300, 400, 600, &window, sf::Color::Green);
 
         window.display();
     }
-
-
 }
