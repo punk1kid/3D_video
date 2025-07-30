@@ -3,6 +3,14 @@
 #include <cstdlib>
 #include <optional>
 
+#ifdef _WIN32
+#include <windows.h>
+extern int main(int, char**);
+int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
+    return main(__argc, __argv);
+}
+#endif
+
 void line(int x0, int x1, int y0, int y1, sf::RenderWindow* window, sf::Color color)
 {
     bool steep = false;
@@ -42,7 +50,7 @@ void triangle(int x0, int y0, int x1, int y1, int x2, int y2, sf::RenderWindow* 
 }
 
 
-int main()
+extern int main(int argc, char **argv)
 {
     sf::RenderWindow window(sf::VideoMode({ 1920, 1080 }), "SFML Triangle");
 
@@ -61,4 +69,5 @@ int main()
 
         window.display();
     }
+    return 0;
 }
