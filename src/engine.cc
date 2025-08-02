@@ -1,15 +1,4 @@
-#include <SFML/Graphics.hpp>
-#include <thread>
-#include <cstdlib>
-#include <optional>
-
-#ifdef _WIN32
-#include <windows.h>
-extern int main(int, char**);
-int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
-    return main(__argc, __argv);
-}
-#endif
+#include "engine.h"
 
 void line(int x0, int x1, int y0, int y1, sf::RenderWindow* window, sf::Color color)
 {
@@ -47,27 +36,4 @@ void triangle(int x0, int y0, int x1, int y1, int x2, int y2, sf::RenderWindow* 
     line(x0, x1, y0, y1, window, color);
     line(x1, x2, y1, y2, window, color);
     line(x2, x0, y2, y0, window, color);
-}
-
-
-extern int main(int argc, char **argv)
-{
-    sf::RenderWindow window(sf::VideoMode({ 1920, 1080 }), "SFML Triangle");
-
-    while (window.isOpen())
-    {
-        while (const std::optional event = window.pollEvent())
-        {
-            if (event->is<sf::Event::Closed>())
-                window.close();
-        }
-
-        window.clear();
-
-
-        triangle(300, 200, 600, 300, 400, 600, &window, sf::Color::Green);
-
-        window.display();
-    }
-    return 0;
 }

@@ -1,34 +1,24 @@
-#include <SFML/Graphics.hpp>
+#include "engine.h"
 
 int main()
 {
-    // create the window
-    sf::RenderWindow window(sf::VideoMode({ 800, 600 }), "My window");
+  cv::Mat image(1080, 1920, CV_8UC3, cv::Scalar(0, 0, 0));
+  sf::RenderWindow window(sf::VideoMode({ 1920, 1080 }), "SFML Triangle");
 
-    // run the program as long as the window is open
-    while (window.isOpen())
+  while (window.isOpen())
+  {
+    while (const std::optional event = window.pollEvent())
     {
-        sf::CircleShape shape(50.f);
-        sf::Vector2f initpos{ 25.f,25.f };
-        shape.setPosition(initpos);
-        // set the shape color to green
-        shape.setFillColor(sf::Color(100, 250, 50));
-
-        // check all the window's events that were triggered since the last iteration of the loop
-        while (const std::optional event = window.pollEvent())
-        {
-            window.clear();
-            // "close requested" event: we close the window
-            if (event->is<sf::Event::Closed>())
-                window.close();
-            shape.setPosition((sf::Vector2f)sf::Mouse::getPosition(window));
-            window.draw(shape);
-
-        }
-
-        // clear the window with black color
-
-        // end the current frame
-        window.display();
+      if (event->is<sf::Event::Closed>())
+        window.close();
     }
+
+    window.clear();
+
+
+    triangle(300, 200, 600, 300, 400, 600, &window, sf::Color::Green);
+
+    window.display();
+  }
+  return 0;
 }

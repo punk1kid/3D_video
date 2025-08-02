@@ -8,8 +8,8 @@
 // See the LICENSE file in the root directory of this project for more details.
 
 // Include guards to prevent multiple inclusions
-#ifndef TREE_D_VIDEO_DIPLOM_INCLUDE_PRECOMPILED_H_
-#define TREE_D_VIDEO_DIPLOM_INCLUDE_PRECOMPILED_H_
+#ifndef TEST_TREE_D_VIDEO_DIPLOM_INCLUDE_PRECOMPILED_H_
+#define TEST_TREE_D_VIDEO_DIPLOM_INCLUDE_PRECOMPILED_H_
 
 // Standard library headers
 #include <iostream>
@@ -19,13 +19,8 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <memory>
-#include <thread>
-#include <cstdlib>
-#include <optional>
 
 // SFML and OpenCV headers
-#include <SFML/Graphics.hpp>
-
 #include <opencv2/opencv.hpp>
 
-#endif // TREE_D_VIDEO_DIPLOM_INCLUDE_PRECOMPILED_H_
+#endif // TEST_TREE_D_VIDEO_DIPLOM_INCLUDE_PRECOMPILED_H_
